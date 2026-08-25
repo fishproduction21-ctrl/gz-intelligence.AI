@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import GzVoice from './components/GzVoice';
 
 export const metadata: Metadata = {
   title: 'GZ Intelligence',
@@ -9,5 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="fr"><body>{children}<script dangerouslySetInnerHTML={{__html:`if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));}`}} /></body></html>;
+  return <html lang="fr"><body>{children}<GzVoice/><script dangerouslySetInnerHTML={{__html:`if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));}`}} /></body></html>;
 }
