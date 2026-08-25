@@ -8,3 +8,10 @@
 .talent-hero h2{font-size:56px;letter-spacing:-2px;margin:0 0 8px}
 .talent-hero p{color:#ddd;font-size:13px;margin:6px 0}
 @media(max-width:600px){.talent-hero{min-height:360px}.talent-hero>div:last-child{padding:24px}.talent-hero h2{font-size:38px}}
+/* GZ: stats in front of the artist image, Spotify-inspired */
+.social-grid{position:relative;z-index:6;margin-top:-118px;margin-left:18px;margin-right:18px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));padding-bottom:6px}
+.social-grid article{background:rgba(12,10,15,.78);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(16px);box-shadow:0 18px 45px rgba(0,0,0,.35)}
+.social-grid strong{font-size:26px;color:#fff}
+.social-grid p{color:#b8afbe}
+.talent-hero+ .social-grid{margin-top:-118px}
+@media(max-width:600px){.social-grid{margin-top:-92px;margin-left:10px;margin-right:10px;grid-template-columns:1fr 1fr}.social-grid article{padding:13px}.social-grid strong{font-size:20px}}
