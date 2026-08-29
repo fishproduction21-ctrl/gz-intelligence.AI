@@ -22,4 +22,13 @@ body{background:#07060a!important}
 .star.on,.favorite-large.on{color:#d8b4fe!important}
 .search{background:rgba(15,12,20,.82)!important;backdrop-filter:blur(18px)}
 .sidebar{background:linear-gradient(180deg,#09070d,#060509)!important}
-@media(max-width:600px){.panel.full:has(.talent-hero)>.talent-hero{min-height:64vh!important;height:64vh!important}.panel.full:has(.talent-hero)>.talent-hero>div:last-child{padding:20px}.panel.full:has(.talent-hero)>.talent-hero h2{font-size:42px!important}.social-grid{margin-top:-88px!important}}
+/* Full-screen Spotify-like artist presentation */
+.panel.full:has(.talent-hero)>.talent-hero{position:relative;overflow:hidden;border-radius:26px!important;margin-top:8px!important;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+.panel.full:has(.talent-hero)>.talent-hero:before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(5,5,7,.02) 0%,rgba(5,5,7,.10) 32%,rgba(5,5,7,.78) 72%,#07060a 100%),linear-gradient(90deg,rgba(5,5,7,.68),transparent 62%);pointer-events:none}
+.panel.full:has(.talent-hero)>.talent-hero:after{content:"";position:absolute;inset:-20%;z-index:0;background:radial-gradient(circle at 78% 12%,rgba(168,85,247,.25),transparent 32%);pointer-events:none}
+.panel.full:has(.talent-hero)>.talent-hero>.talent-photo{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;object-position:center 22%!important;z-index:-1!important}
+.panel.full:has(.talent-hero)>.talent-hero>div:last-child{position:relative!important;z-index:2!important;margin-top:auto!important;max-width:900px!important}
+.panel.full:has(.talent-hero)>.talent-hero h2{font-size:clamp(48px,7vw,96px)!important;line-height:.92!important;letter-spacing:-.05em!important}
+.panel.full:has(.talent-hero)>.talent-hero p{font-size:clamp(15px,1.5vw,20px)!important}
+.house-logo{width:42px!important;height:42px!important;object-fit:contain!important;padding:7px!important}
+@media(max-width:600px){.panel.full:has(.talent-hero)>.talent-hero{min-height:64vh!important;height:64vh!important;border-radius:20px!important}.panel.full:has(.talent-hero)>.talent-hero>div:last-child{padding:20px!important}.panel.full:has(.talent-hero)>.talent-hero h2{font-size:42px!important}.social-grid{margin-top:-88px!important}}
