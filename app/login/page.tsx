@@ -4,11 +4,8 @@ import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://lzuyaaxmjnklhjutxbio.supabase.co',
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable__WZhhkjiKnCqmqspjL5tbQ_9o1fHoC8',
-  { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } }
-);
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
 export default function LoginPage() {
   const router = useRouter();
@@ -21,6 +18,16 @@ export default function LoginPage() {
     event.preventDefault();
     setBusy(true);
     setError('');
+
+    if (!supabaseUrl || !supabaseKey) {
+      setError('La configuration de connexion est indisponible.');
+      setBusy(false);
+      return;
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseKey, {
+      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+    });
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) setError('Email ou mot de passe incorrect.');
     else router.replace('/');
