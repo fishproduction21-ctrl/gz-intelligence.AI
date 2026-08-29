@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import './gz-premium.css';
+import './gz-ai.css';
 import GzVoice from './components/GzVoice';
 import GzAI from './components/GzAI';
 
