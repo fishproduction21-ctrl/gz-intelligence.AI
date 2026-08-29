@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import './gz-premium.css';
 import GzVoice from './components/GzVoice';
 
 export const metadata: Metadata = {
