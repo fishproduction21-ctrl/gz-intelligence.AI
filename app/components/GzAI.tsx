@@ -1,17 +1,29 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://lzuyaaxmjnklhjutxbio.supabase.co', process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '');
 type Msg = { role: 'user' | 'assistant'; content: string };
+
+function getSupabase(): SupabaseClient | null {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key);
+}
 
 export default function GzAI() {
   const [open, setOpen] = useState(false), [input, setInput] = useState(''), [busy, setBusy] = useState(false), [messages, setMessages] = useState<Msg[]>([]), [name, setName] = useState('');
-  useEffect(() => { supabase.auth.getUser().then(({ data }) => setName(String(data.user?.user_metadata?.first_name || '').trim())); }, []);
+  useEffect(() => {
+    const supabase = getSupabase();
+    if (!supabase) return;
+    supabase.auth.getUser().then(({ data }) => setName(String(data.user?.user_metadata?.first_name || '').trim()));
+  }, []);
   async function send() {
     const text = input.trim(); if (!text || busy) return;
     const next: Msg[] = [...messages, { role: 'user', content: text }]; setMessages(next); setInput(''); setBusy(true);
     try {
+      const supabase = getSupabase();
+      if (!supabase) throw new Error('Supabase configuration missing');
       const { data } = await supabase.auth.getSession();
       const r = await fetch('/api/gz-ai', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${data.session?.access_token || ''}` }, body: JSON.stringify({ messages: next }) });
       const json = await r.json(); setMessages([...next, { role: 'assistant', content: json.text || json.error || 'Je rencontre un problème temporaire.' }]);
