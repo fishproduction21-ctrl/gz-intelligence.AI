@@ -1,0 +1,25 @@
+/* GZ Intelligence — premium Spotify-inspired skin */
+:root{--gz-purple:#a855f7;--gz-violet:#7c3aed;--gz-bg:#07060a;--gz-panel:rgba(13,11,17,.76);--gz-line:rgba(255,255,255,.10)}
+body{background:#07060a!important}
+.logo{position:relative;font-family:Arial,Helvetica,sans-serif;font-weight:950;letter-spacing:-2px;font-size:25px;text-transform:uppercase;text-shadow:0 0 22px rgba(168,85,247,.35)}
+.logo:before{content:'GZ';display:inline-block;margin-right:7px;font-weight:1000;font-style:italic;letter-spacing:-4px;background:linear-gradient(135deg,#fff 15%,#d8b4fe 45%,#8b5cf6 80%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(168,85,247,.5))}
+.logo{font-size:0}.logo span{font-size:8px!important;letter-spacing:4px!important;margin-left:1px!important;color:#aaa0b3!important}
+.auth-logo{font-size:0}.auth-logo:before{font-size:45px}.auth-logo span{display:block!important;margin-top:8px!important}
+.gz-mark{font-size:0!important}.gz-mark:after{content:'GZ';font-size:18px;font-weight:1000;font-style:italic;letter-spacing:-2px;color:#c084fc;text-shadow:0 0 18px rgba(168,85,247,.8)}
+.panel.full:has(.talent-hero){background:radial-gradient(circle at 50% 0,rgba(105,36,145,.14),transparent 42%),#07060a!important}
+.panel.full:has(.talent-hero)>.panel-head{background:linear-gradient(180deg,rgba(7,6,10,.98),rgba(7,6,10,.72) 65%,transparent)!important;border-bottom:1px solid rgba(255,255,255,.04)}
+.panel.full:has(.talent-hero)>.talent-hero{min-height:74vh!important;height:74vh!important}
+.panel.full:has(.talent-hero)>.talent-hero .talent-photo{image-rendering:auto;filter:saturate(1.02) contrast(1.04);transform:scale(1.015)}
+.panel.full:has(.talent-hero)>.talent-hero>div:last-child{padding-left:clamp(24px,6vw,90px);padding-bottom:42px}
+.panel.full:has(.talent-hero)>.talent-hero h2{font-weight:950;text-shadow:0 4px 35px rgba(0,0,0,.95)}
+.panel.full:has(.talent-hero)>.talent-hero p{font-size:15px;color:#eee;text-shadow:0 2px 15px #000}
+.social-grid{margin-top:-112px!important;gap:12px!important}
+.social-grid article{background:rgba(9,8,13,.70)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:12px!important;backdrop-filter:blur(18px) saturate(1.15)!important}
+.social-grid article:hover{border-color:rgba(168,85,247,.55)!important;transform:translateY(-2px);transition:.18s ease}
+.match-list{gap:10px!important}.match{background:linear-gradient(135deg,rgba(21,16,27,.94),rgba(10,9,13,.9))!important;border-color:rgba(255,255,255,.09)!important;border-radius:12px!important;min-height:74px}.match strong{font-size:25px!important;color:#d8b4fe!important;text-shadow:0 0 14px rgba(168,85,247,.35)}
+.house-logo{background:#fff!important;border-radius:9px!important}
+.news{padding:15px 4px!important}.news:hover{background:rgba(168,85,247,.055);padding-left:8px!important;border-radius:8px;transition:.15s ease}
+.star.on,.favorite-large.on{color:#d8b4fe!important}
+.search{background:rgba(15,12,20,.82)!important;backdrop-filter:blur(18px)}
+.sidebar{background:linear-gradient(180deg,#09070d,#060509)!important}
+@media(max-width:600px){.panel.full:has(.talent-hero)>.talent-hero{min-height:64vh!important;height:64vh!important}.panel.full:has(.talent-hero)>.talent-hero>div:last-child{padding:20px}.panel.full:has(.talent-hero)>.talent-hero h2{font-size:42px!important}.social-grid{margin-top:-88px!important}}
