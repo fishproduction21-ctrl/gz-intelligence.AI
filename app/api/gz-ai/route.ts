@@ -2,22 +2,38 @@ import { gateway, generateText } from 'ai';
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://lzuyaaxmjnklhjutxbio.supabase.co',
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || ''
-);
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  if (!url || !key) {
+    throw new Error('Missing Supabase environment variables');
+  }
+
+  return createClient(url, key);
+}
 
 export async function POST(req: Request) {
   try {
+    const supabase = getSupabaseClient();
     const auth = req.headers.get('authorization');
-    if (!auth?.startsWith('Bearer ')) return NextResponse.json({ error: 'Non authentifié.' }, { status: 401 });
+    if (!auth?.startsWith('Bearer ')) {
+      return NextResponse.json({ error: 'Non authentifié.' }, { status: 401 });
+    }
+
     const token = auth.slice(7);
     const { data: userData, error: userError } = await supabase.auth.getUser(token);
-    if (userError || !userData.user) return NextResponse.json({ error: 'Session expirée.' }, { status: 401 });
+    if (userError || !userData.user) {
+      return NextResponse.json({ error: 'Session expirée.' }, { status: 401 });
+    }
 
     const body = await req.json();
     const messages = Array.isArray(body?.messages) ? body.messages.slice(-16) : [];
-    const prompt = messages.map((m: { role?: string; content?: string }) => `${m.role === 'user' ? 'UTILISATEUR' : 'GZ'}: ${String(m.content || '').slice(0, 6000)}`).join('\n');
+    const prompt = messages
+      .map((m: { role?: string; content?: string }) =>
+        `${m.role === 'user' ? 'UTILISATEUR' : 'GZ'}: ${String(m.content || '').slice(0, 6000)}`,
+      )
+      .join('\n');
 
     const result = await generateText({
       model: gateway('openai/gpt-5-mini'),
@@ -28,6 +44,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ text: result.text });
   } catch (error) {
     console.error('GZ AI error', error);
-    return NextResponse.json({ error: 'GZ AI est temporairement indisponible. Vérifie la configuration du fournisseur IA.' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'GZ AI est temporairement indisponible. Vérifie la configuration du fournisseur IA.' },
+      { status: 500 },
+    );
   }
 }
