@@ -13,5 +13,15 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="fr"><body>{children}<GzVoice/><GzAI/><script dangerouslySetInnerHTML={{__html:`if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));}`}} /></body></html>;
+  return (
+    <html lang="fr">
+      <body>
+        {children}
+        <GzVoice />
+        <GzAI />
+        <style dangerouslySetInnerHTML={{ __html: `*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto!important}` }} />
+        <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(r=>r.unregister()));if('caches' in window){const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('gz-intelligence-')).map(k=>caches.delete(k)));}}catch{}});}` }} />
+      </body>
+    </html>
+  );
 }
