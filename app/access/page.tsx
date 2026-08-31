@@ -48,14 +48,7 @@ export default function AssociateAccess() {
     const { data, error: authError } = await supabase.auth.signUp({
       email: normalized,
       password,
-      options: {
-        data: {
-          first_name: first.trim(),
-          last_name: last.trim(),
-          role: 'associate',
-          workspace: 'GZ Intelligence',
-        },
-      },
+      options: { data: { first_name: first.trim(), last_name: last.trim(), role: 'associate', workspace: 'GZ Intelligence' } },
     });
     if (authError) setError(authError.message);
     else if (data.session) window.location.href = '/';
@@ -65,9 +58,7 @@ export default function AssociateAccess() {
 
   return (
     <main className="gz-access">
-      <div className="gz-access-orb one" />
-      <div className="gz-access-orb two" />
-      <div className="gz-access-grid" />
+      <div className="gz-access-orb one" /><div className="gz-access-orb two" /><div className="gz-access-grid" />
       <section className="gz-access-shell">
         <aside className="gz-access-identity">
           <div className="gz-access-brand"><div className="gz-access-mark">GZ</div><div><strong>GZ</strong><span>AGENCY</span></div></div>
@@ -79,14 +70,12 @@ export default function AssociateAccess() {
           <div className="gz-access-seal"><div className="gz-access-lock">⌁</div><div><strong>ACCÈS RÉSERVÉ</strong><span>Invitation associée · GZ Agency</span></div></div>
           <div className="gz-access-trust"><span>◈<small>SÉCURISÉ</small></span><span>◇<small>CONFIDENTIEL</small></span><span>♔<small>PRESTIGE</small></span></div>
         </aside>
-
         <section className="gz-access-panel">
           <div className="gz-access-panel-top"><span>INVITATION ASSOCIÉ GZ</span><span className="gz-access-dot">●</span></div>
           <div className="gz-access-icon">⌁</div>
           <p className="gz-access-panel-kicker">BIENVENUE DANS</p>
           <h2>L’espace <em>Associé.</em></h2>
           <p className="gz-access-sub">Votre invitation est personnelle. Définissez vos identifiants pour activer votre accès privé.</p>
-
           <form onSubmit={submit}>
             <div className="gz-access-row">
               <label>Prénom<input required value={first} onChange={e => setFirst(e.target.value)} placeholder="Votre prénom" autoComplete="given-name" /></label>
@@ -98,9 +87,7 @@ export default function AssociateAccess() {
             <div className="gz-access-rules"><span>✓ 8 caractères minimum</span><span>✓ Accès personnel et confidentiel</span></div>
             <button disabled={busy}>{busy ? 'Activation de votre accès…' : 'ACTIVER MON ACCÈS  →'}</button>
           </form>
-
-          {error && <p className="gz-access-error">{error}</p>}
-          {message && <p className="gz-access-success">{message}</p>}
+          {error && <p className="gz-access-error">{error}</p>}{message && <p className="gz-access-success">{message}</p>}
           <div className="gz-access-secure">⌁ &nbsp; ACCÈS 100% SÉCURISÉ</div>
         </section>
       </section>
